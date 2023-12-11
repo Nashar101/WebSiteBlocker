@@ -1,0 +1,52 @@
+<%= form_with(model: blockedsite) do |form| %>
+  <% if blockedsite.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(blockedsite.errors.count, "error") %> prohibited this blockedsite from being saved:</h2>
+
+      <ul>
+        <% blockedsite.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :link, style: "display: block" %>
+    <%= form.text_field :link %>
+  </div>
+
+  <div>
+    <%= form.label :durationtype, style: "display: block" %>
+    <%= form.text_field :durationtype %>
+  </div>
+
+  <div>
+    <%= form.label :days, style: "display: block" %>
+    <%= form.number_field :days, min:0%>
+  </div>
+
+  <div>
+    <%= form.label :hours, style: "display: block" %>
+    <%= form.number_field :hours, max:24, min:0%>
+  </div>
+
+  <div>
+    <%= form.label :minutes, style: "display: block" %>
+    <%= form.number_field :minutes, max: 60, min: 0 %>
+  </div>
+
+  <div>
+    <%= form.label :seconds, style: "display: block" %>
+    <%= form.number_field :seconds, max: 60, min: 0 %>
+  </div>
+
+  <div>
+    <%= form.label :duedate, style: "display: block" %>
+    <%= form.date_field :duedate %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

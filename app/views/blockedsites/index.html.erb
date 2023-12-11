@@ -1,0 +1,42 @@
+<p style="color: green"><%= notice %></p>
+<body>
+<h1>Blockedsites</h1>
+
+<div id="blockedsites">
+  <table class="table table-striped table-dark">
+    <thead>
+    <tr>
+      <th scope="col">Link</th>
+      <th scope="col">Type</th>
+      <th scope="col">Days</th>
+      <th scope="col">Hours</th>
+      <th scope="col">Minutes</th>
+      <th scope="col">Seconds</th>
+    </tr>
+    </thead>
+
+    <tbody  id="timerTable" >
+    <div style="display: none"><%@counter = 0 %></div>
+    <% @blockedsites.each do |blockedsite| %>
+    <tr>
+      <td><%=blockedsite.link %></td>
+      <td><%=blockedsite.durationtype %></td>
+      <td id="days <%=@counter%>"><%=blockedsite.display_days%></td>
+      <td id="hours <%=@counter%>"><%=blockedsite.display_hours%></td>
+      <td id="minutes <%=@counter%>"><%=blockedsite.minutes %></td>
+      <td id="seconds <%=@counter%>"><%=blockedsite.seconds%></td>
+
+      <script type="text/javascript">
+          decrement(<%=@counter%>);
+      </script>
+      <td><%= link_to "Show this blockedsite", blockedsite, class: "btn btn-secondary" %></td>
+      <div style="display: none"><%@counter +=1 %></div>
+    <% end %>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<%= link_to "New blockedsite", new_blockedsite_path %>
+</body>

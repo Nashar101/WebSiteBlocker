@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  link: MyString
+  durationtype: MyString
+  days: 1
+  hours: 1
+  minutes: 1
+  seconds: 1
+  duedate: 2023-12-11
+
+two:
+  link: MyString
+  durationtype: MyString
+  days: 1
+  hours: 1
+  minutes: 1
+  seconds: 1
+  duedate: 2023-12-11

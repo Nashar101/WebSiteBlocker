@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @blockedsite %>
+
+<div>
+  <%= link_to "Edit this blockedsite", edit_blockedsite_path(@blockedsite) %> |
+  <%= link_to "Back to blockedsites", blockedsites_path %>
+
+  <%= button_to "Destroy this blockedsite", @blockedsite, method: :delete %>
+</div>
