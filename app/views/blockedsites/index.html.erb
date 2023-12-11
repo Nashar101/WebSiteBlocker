@@ -21,15 +21,18 @@
     <tr>
       <td><%=blockedsite.link %></td>
       <td><%=blockedsite.durationtype %></td>
-      <td id="days <%=@counter%>"><%=blockedsite.display_days%></td>
-      <td id="hours <%=@counter%>"><%=blockedsite.display_hours%></td>
-      <td id="minutes <%=@counter%>"><%=blockedsite.minutes %></td>
-      <td id="seconds <%=@counter%>"><%=blockedsite.seconds%></td>
-
+      <td id="days <%=@counter%>"></td>
+      <td id="hours <%=@counter%>"></td>
+      <td id="minutes <%=@counter%>"></td>
+      <td id="seconds <%=@counter%>"></td>
       <script type="text/javascript">
-          decrement(<%=@counter%>);
+          decrementDays(<%=@counter%>, "<%=blockedsite.duedate.to_time.to_s%>");
+          decrementHours(<%=@counter%>, "<%=blockedsite.duedate.to_time.to_s%>");
+          decrementMinutes(<%=@counter%>, "<%=blockedsite.duedate.to_time.to_s%>");
+          decrementSeconds(<%=@counter%>, "<%=blockedsite.duedate.to_time.to_s%>");
       </script>
       <td><%= link_to "Show this blockedsite", blockedsite, class: "btn btn-secondary" %></td>
+      <td><%= button_to "Remove Timer", blockedsite_path(blockedsite), method: :delete, class: "btn btn-secondary", id: ("delete "+@counter.to_s) %></td>
       <div style="display: none"><%@counter +=1 %></div>
     <% end %>
     </tr>
