@@ -4,6 +4,7 @@ class BlockedsitesController < ApplicationController
   # GET /blockedsites or /blockedsites.json
   def index
     @blockedsites = Blockedsite.all
+    @blockedsite = Blockedsite.new
   end
 
   # GET /blockedsites/1 or /blockedsites/1.json
@@ -22,9 +23,40 @@ class BlockedsitesController < ApplicationController
   # POST /blockedsites or /blockedsites.json
   def create
     @blockedsite = Blockedsite.new(blockedsite_params)
-    @blockedsite.duedate = (Time.now + (@blockedsite.days*24*60*60) +(@blockedsite.hours*60*60) + (@blockedsite.minutes*60*60) + (@blockedsite.seconds))
-    @blockedsite.days = @blockedsite.display_days
-    @blockedsite.hours = @blockedsite.display_hours
+    if @blockedsite.days == nil
+      @blockedsite.days = 0
+    end
+    if @blockedsite.hours == nil
+      @blockedsite.hours = 0
+    end
+    if @blockedsite.minutes == nil
+      @blockedsite.minutes = 0
+    end
+    if @blockedsite.seconds == nil
+      @blockedsite.seconds = 0
+    end
+    @blockedsite.duedate = (Time.now + (@blockedsite.days*24*60*60) +(@blockedsite.hours*60*60) + (@blockedsite.minutes*60) + (@blockedsite.seconds))
+    respond_to do |format|
+      if @blockedsite.save
+        /the line below is what redirects you to the cration page url/
+        format.html { redirect_to blockedsites_path, notice: "Blockedsite was successfully created." }
+        format.json { render :show, status: :created, location: @blockedsite }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @blockedsite.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def submit(link, duration_type="Timed", days, hours, minutes, seconds)
+    @blockedsite = Blockedsite.new()
+    @blockedsite.link = link
+    @blockedsite.durationtype = duration_type
+    @blockedsite.days = days
+    @blockedsite.hours = hours
+    @blockedsite.minutes = minutes
+    @blockedsite.seconds = seconds
+    @blockedsite.duedate = (Time.now + (@blockedsite.days*24*60*60) +(@blockedsite.hours*60*60) + (@blockedsite.minutes*60) + (@blockedsite.seconds))
     respond_to do |format|
       if @blockedsite.save
         format.html { redirect_to blockedsite_url(@blockedsite), notice: "Blockedsite was successfully created." }
@@ -34,9 +66,7 @@ class BlockedsitesController < ApplicationController
         format.json { render json: @blockedsite.errors, status: :unprocessable_entity }
       end
     end
-    @blockedsite[:decrease]
   end
-
   # PATCH/PUT /blockedsites/1 or /blockedsites/1.json
   def update
     respond_to do |format|
