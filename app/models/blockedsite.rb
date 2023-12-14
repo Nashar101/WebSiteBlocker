@@ -17,4 +17,13 @@ class Blockedsite < ApplicationRecord
   def display_seconds
     ((duedate)-((display_days.to_i*24*60*60)+(display_hours.to_i*60*60)+(display_minutes.to_i*60))).to_i.round
   end
+
+  def setTimed
+    durationtype = "Timed"
+  end
+
+  def setPermanent
+    durationtype = "Permanent"
+  end
+
 end

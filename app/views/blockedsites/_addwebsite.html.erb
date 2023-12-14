@@ -1,0 +1,35 @@
+<%= form_with(model: @blockedsite) do |form| %>
+  <div style="display: flex; margin-bottom: 20px">
+    <td><%= form.text_field :link, class: "form-link", placeholder:"Add a website URL", size: 50, style: "margin-right: 60px" %></td>
+
+    <textarea placeholder="Add an Extension ID" style="resize: none"></textarea>
+    <button style="font-size: 30px; border: none; color: #c1c1c1; background: transparent; width: 0px; height: 0px; margin-top: -5px;">+</button>
+  </div>
+  <h3 style="color: #666666; margin-bottom: 40px">Block Duration</h3>
+  <div style="display: flex; font-size: 20px; margin-bottom: 90px">
+    <div id="hide" class="form-check" style="margin-right: 65px">
+      <%= form.radio_button :durationtype, @blockedsite.setPermanent, class: "form-check-input", id: "flexRadioDefault1" %>
+      <label class="form-check-label" for="flexRadioDefault1">
+        Permanent
+      </label>
+    </div>
+    <div id="show" class="form-check">
+      <%= form.radio_button :durationtype, @blockedsite.setTimed, :checked => true, class: "form-check-input", id: "flexRadioDefault2"%>
+      <label class="form-check-label" for="flexRadioDefault2">
+        Timer
+      </label>
+    </div>
+    <div id="timer-settings" style=" margin-left: 30px;margin-top: -11px">
+      <td><%= form.number_field :days, min:0, max:999, placeholder: "0", class: "size"%></td>
+      <b style="font-size: 30px; margin-top: -6px">:</b>
+      <td><%= form.number_field :hours, min:0, max:24, placeholder: "0", class: "size"%></td>
+      <b style="font-size: 30px; margin-top: -6px">:</b>
+      <td><%= form.number_field :minutes, min:0, max:60, placeholder: "0", class: "size"%></td>
+      <b style="font-size: 30px; margin-top: -6px">:</b>
+      <td><%= form.number_field :seconds, min:0, max:60, placeholder: "0", class: "size"%></td>
+    </div>
+    <div onclick="sendData()">
+    <%= form.submit :+, style: "font-size: 30px; border: none; color: #c1c1c1; background: transparent; margin-top: -10px;" %>
+    </div>
+  </div>
+<% end %>

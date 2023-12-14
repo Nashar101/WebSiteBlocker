@@ -1,39 +1,9 @@
-<p style="color: green"><%= notice %></p>
+<% if notice %>
+  <% render 'layouts/alerts' %>
+<% end %>
 <body>
 <h1 style="font-weight: bold; color: #666666">Add a website</h1>
-<%= form_with(model: @blockedsite) do |form| %>
-<div style="display: flex; margin-bottom: 20px">
-  <td><%= form.text_field :link, style:"resize: none", placeholder:"Add a website URL"%></td>
-  <textarea id="website_link" placeholder="Add a website URL" style="resize: none"></textarea>
-  <textarea placeholder="Add an Extension ID" style="resize: none"></textarea>
-  <button style="font-size: 30px; border: none; color: #c1c1c1; background: transparent; width: 0px; height: 0px; margin-top: -5px;">+</button>
-</div>
-<h3 style="color: #666666; margin-bottom: 40px">Block Duration</h3>
-<div style="display: flex; font-size: 20px; margin-bottom: 90px">
-  <div id="hide" class="form-check" style="margin-right: 65px">
-    <input  class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-    <label class="form-check-label" for="flexRadioDefault1">
-      Permanent
-    </label>
-  </div>
-  <div id="show" class="form-check">
-    <input  class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-    <label class="form-check-label" for="flexRadioDefault2">
-      Timer
-    </label>
-  </div>
-  <div id="timer-settings" style=" margin-left: 30px;margin-top: -11px">
-    <input type="number" id="days" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" min="0" max="99" maxlength="2" class="size" placeholder="0">
-    <b style="font-size: 30px; margin-top: -6px">:</b>
-    <input type="number" id="hours" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" min="0" max="99" maxlength="2" class="size" placeholder="0">
-    <b style="font-size: 30px; margin-top: -6px">:</b>
-    <input type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" min="0" max="99" maxlength="2" class="size" placeholder="0">
-    <b style="font-size: 30px; margin-top: -6px">:</b>
-    <input type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" min="0" max="99" maxlength="2" class="size" style="margin-right: 25px" placeholder="0">
-  </div>
-  <button style="font-size: 30px; border: none; color: #c1c1c1; background: transparent; width: 0px; height: 0px; margin-top: -8px;" onclick="submit()">+</button>
-</div>
-<% end %>
+<%= render 'addwebsite' %>
 <div>
   <hr style="margin-bottom: 35px"/>
 
@@ -88,13 +58,7 @@
             </ul>
           </div>
         <% end %>
-      <td><%= form.text_field :link, class: "dark-fields"%></td>
-      <td><%= form.text_field :durationtype, class: "dark-fields" %></td>
-      <td><%= form.number_field :days, min:0, max:999, placeholder: "0", class: "dark-fields"%></td>
-      <td><%= form.number_field :hours, min:0, max:24 , placeholder: "0", class: "dark-fields"%></td>
-      <td><%= form.number_field :minutes, min:0, max:60, placeholder: "0", class: "dark-fields"%></td>
-      <td><%= form.number_field :seconds, min:0, max:60, placeholder: "0", class: "dark-fields"%></td>
-        <td><%= form.submit :"Add Website" , class: "btn btn-secondary" %></td>
+
       <% end %>
     </tr>
     </tbody>

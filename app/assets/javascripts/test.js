@@ -52,56 +52,9 @@ function display_seconds(duedate){
    return  duedate%60;
 }
 
-function showTimer(){
-    console.log("im being called")
-    if (document.getElementById("timer-settings").innerHTML.trim() === '') {
-        return document.getElementById("timer-settings").innerHTML = '<input\n' +
-            '                  type="number"\n' +
-            '                  id="days"\n' +
-            '                  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"\n' +
-            '                  min="0"\n' +
-            '                  max="99"\n' +
-            '                  maxlength="2"\n' +
-            '                  class="size"\n' +
-            '                  placeholder="0" \n' +
-            '                />' +
-            '<b style="font-size: 30px; margin-top: -6px">:</b>' +
-            '<input\n' +
-            '                  type="number"\n' +
-            '                  id="hours"\n' +
-            '                  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"\n' +
-            '                  min="0"\n' +
-            '                  max="99"\n' +
-            '                  maxlength="2"\n' +
-            '                  class="size"\n' +
-            '                  placeholder="0" \n' +
-            '                />' +
-            '<b style="font-size: 30px; margin-top: -6px">:</b>' +
-            '<input\n' +
-            '                  type="number"\n' +
-            '                  type="minutes"\n' +
-            '                  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"\n' +
-            '                  min="0"\n' +
-            '                  max="99"\n' +
-            '                  maxlength="2"\n' +
-            '                  class="size"\n' +
-            '                  placeholder="0" \n' +
-            '                />' +
-            '<b style="font-size: 30px; margin-top: -6px">:</b>' +
-            '<input\n' +
-            '                  type="number"\n' +
-            '                  type="seconds"\n' +
-            '                  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"\n' +
-            '                  min="0"\n' +
-            '                  max="99"\n' +
-            '                  maxlength="2"\n' +
-            '                  class="size"\n' +
-            '                  style="margin-right: 25px"\n' +
-            '                  placeholder="0" \n' +
-            '                />'
-    }
-}
-
-function hideTimer(){
-    return document.getElementById("timer-settings").innerHTML = ''
+function sendData(){
+    console.log("yh i work")
+    chrome.runtime.sendMessage("mcghgdbfphaojfifabbkbfokiefooboj", {message: "hi"}, function(response){
+        alert(response)
+    })
 }
