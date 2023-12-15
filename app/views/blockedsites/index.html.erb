@@ -66,22 +66,7 @@
 </div>
 
   <script type="text/javascript">
-      document.querySelector("#hide").addEventListener("click", () => {
-          var test = document.getElementById('timer-settings')
-          test.style.display = "none";
-          console.log("im being clicked")
-          <%=@blockedsite.durationtype = "Permanent"%>
-      });
-      document.querySelector("#show").addEventListener("click", () => {
-          var test = document.getElementById('timer-settings')
-          test.style.display = '';
-          setTimed()
-          console.log("im being clicked")
-      });
 
-      function setTimed(){
-          <%= @blockedsite.durationtype = "Timed" %>
-      }
   </script>
 
 

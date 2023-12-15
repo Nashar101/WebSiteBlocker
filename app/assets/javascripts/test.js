@@ -52,9 +52,57 @@ function display_seconds(duedate){
    return  duedate%60;
 }
 
-function sendData(){
-    console.log("yh i work")
-    chrome.runtime.sendMessage("mcghgdbfphaojfifabbkbfokiefooboj", {message: "hi"}, function(response){
+function sendData(WebsiteLink){
+    let link = document.getElementById('blockedsite_link').value
+    console.log(link)
+    let days = document.getElementById("blockedsite_days").value
+    let hours = document.getElementById("blockedsite_hours").value
+    let minutes = document.getElementById("blockedsite_minutes").value
+    let seconds = document.getElementById("blockedsite_seconds").value
+
+    if(days === undefined){
+        days = 0;
+    }
+    if(hours === undefined){
+        hours = 0;
+    }
+    if(minutes === undefined){
+        minutes = 0;
+    }
+    if(seconds === undefined){
+        seconds = 0;
+    }
+    console.log(days)
+    console.log(hours)
+    console.log(minutes)
+    console.log(seconds)
+    let dueDate = (Date.now() + (days*24*60*60*1000) +(hours*60*60*1000) + (minutes*60*1000) + (seconds*1000))
+
+    console.log(dueDate)
+    chrome.runtime.sendMessage("mcghgdbfphaojfifabbkbfokiefooboj", {message: [link, dueDate]}, function(response){
         alert(response)
     })
 }
+
+function init(){
+    var counter = 2
+    var interval = setInterval(function(){
+        counter--;
+        if(counter <= 0){
+            document.querySelector("#hide").addEventListener("click", () => {
+                var test = document.getElementById('timer-settings')
+                test.style.display = "none";
+                console.log("im being clicked")
+            });
+            document.querySelector("#show").addEventListener("click", () => {
+                var test = document.getElementById('timer-settings')
+                test.style.display = '';
+                console.log("im being clicked")
+            });
+            clearInterval(interval)
+        }
+
+    },1000)
+
+}
+init()

@@ -37,7 +37,7 @@ class BlockedsitesController < ApplicationController
     end
     @blockedsite.duedate = (Time.now + (@blockedsite.days*24*60*60) +(@blockedsite.hours*60*60) + (@blockedsite.minutes*60) + (@blockedsite.seconds))
     @blockedsite.save
-    respond_to do |format|
+    /respond_to do |format|
       if @blockedsite.save
         flash[:notice] =  "Blockedsite was successfully created."
         format.html { redirect_to blockedsites_path, notice: "Blockedsite was successfully created." }
@@ -46,7 +46,7 @@ class BlockedsitesController < ApplicationController
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @blockedsite.errors, status: :unprocessable_entity }
       end
-    end
+    end/
   end
 
   # PATCH/PUT /blockedsites/1 or /blockedsites/1.json
