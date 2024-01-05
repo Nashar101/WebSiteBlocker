@@ -1,5 +1,8 @@
 <% if notice %>
-  <% render 'layouts/alerts' %>
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <%= notice %>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">X</button>
+  </div>
 <% end %>
 <body>
 <h1 style="font-weight: bold; color: #666666">Add a website</h1>

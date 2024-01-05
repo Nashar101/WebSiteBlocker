@@ -129,8 +129,6 @@ GEM
     nio4r (2.7.0)
     nokogiri (1.15.5-x64-mingw-ucrt)
       racc (~> 1.4)
-    nokogiri (1.15.5-x86_64-linux)
-      racc (~> 1.4)
     psych (5.1.1.1)
       stringio
     public_suffix (5.0.4)
@@ -138,6 +136,8 @@ GEM
       nio4r (~> 2.0)
     racc (1.7.3)
     rack (2.2.8)
+    rack-attack (6.7.0)
+      rack (>= 1.0, < 4)
     rack-test (2.1.0)
       rack (>= 1.3)
     rails (7.0.8)
@@ -188,7 +188,6 @@ GEM
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
     sqlite3 (1.6.9-x64-mingw-ucrt)
-    sqlite3 (1.6.9-x86_64-linux)
     stimulus-rails (1.3.0)
       railties (>= 6.0.0)
     stringio (3.1.0)
@@ -221,7 +220,6 @@ GEM
 
 PLATFORMS
   x64-mingw-ucrt
-  x86_64-linux
 
 DEPENDENCIES
   bootsnap
@@ -230,6 +228,7 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   puma (~> 5.0)
+  rack-attack
   rails (~> 7.0.0)
   selenium-webdriver
   sprockets-rails
@@ -241,7 +240,7 @@ DEPENDENCIES
   webdrivers
 
 RUBY VERSION
-   ruby 3.0.6p216
+   ruby 3.2.2p53
 
 BUNDLED WITH
    2.4.22

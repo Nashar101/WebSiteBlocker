@@ -21,6 +21,11 @@ class BlockedsitesController < ApplicationController
   end
 
   # POST /blockedsites or /blockedsites.json
+
+  def shortenLink(url)
+    match = url.match(%r{^([^/]+://[^/]+).*})
+    match ? match[1] : url
+  end
   def create
     @blockedsite = Blockedsite.new(blockedsite_params)
     if @blockedsite.days == nil
@@ -36,8 +41,17 @@ class BlockedsitesController < ApplicationController
       @blockedsite.seconds = 0
     end
     @blockedsite.duedate = (Time.now + (@blockedsite.days*24*60*60) +(@blockedsite.hours*60*60) + (@blockedsite.minutes*60) + (@blockedsite.seconds))
+    url_regex = /\Ahttps?:\/\/(?:www\.)?[a-zA-Z0-9-]+(?:\.[a-zA-Z]{2,})+(?:\/[^\s]*)?\z/
+    if (!@blockedsite.link.match(/\Ahttps?:\/\/(?:www\.)?[a-zA-Z0-9-]+(?:\.[a-zA-Z]{2,})+(?:\/[^\s]*)?\z/))
+      respond_to do |format|
+        format.html { redirect_to blockedsites_path, notice: "Please enter a valid website link" }
+        format.json { render :show, status: :created, location: @blockedsite }
+      end
+      return
+    end
+    @blockedsite.link = shortenLink(@blockedsite.link)
     @blockedsite.save
-    /respond_to do |format|
+    respond_to do |format|
       if @blockedsite.save
         flash[:notice] =  "Blockedsite was successfully created."
         format.html { redirect_to blockedsites_path, notice: "Blockedsite was successfully created." }
@@ -46,7 +60,7 @@ class BlockedsitesController < ApplicationController
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @blockedsite.errors, status: :unprocessable_entity }
       end
-    end/
+    end
   end
 
   # PATCH/PUT /blockedsites/1 or /blockedsites/1.json
